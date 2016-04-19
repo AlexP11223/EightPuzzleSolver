@@ -1,36 +1,27 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 
 namespace EightPuzzleSolver.Search
 {
-    public class Node
+    public class Node<TProblemState> where TProblemState : IProblemState<TProblemState>
     {
-        public Node(object state)
+        public Node(TProblemState state)
         {
             State = state;
             PathCost = 0;
         }
 
-        /// <summary>
-        /// </summary>
-        /// <param name="action">The action that was applied to the parent to generate the node</param>
-        /// <param name="stepCost">The cost from the parent node to this node</param>
-        public Node(object state, Node parent, Action action, int stepCost)
+        public Node(TProblemState state, Node<TProblemState> parent)
             : this(state)
         {
             Parent = parent;
-            Action = action;
             if (Parent != null)
-                PathCost = Parent.PathCost + stepCost;
+                PathCost = Parent.PathCost + state.Cost;
         }
 
-        public object State { get; }
+        public TProblemState State { get; }
 
-        public Node Parent { get; }
-
-        /// <summary>
-        /// The action that was applied to the parent to generate the node
-        /// </summary>
-        public Action Action { get; }
+        public Node<TProblemState> Parent { get; }
 
         /// <summary>
         /// The cost of the path from the initial statee to the node
@@ -39,9 +30,24 @@ namespace EightPuzzleSolver.Search
         
         public bool IsRootNode => Parent == null;
 
-        public IEnumerable<Node> PathFromRoot()
+        /// <summary>
+        /// Returns the nodes available from this node
+        /// </summary>
+        public IEnumerable<Node<TProblemState>> ExpandNode()
         {
-            var path = new Stack<Node>();
+            var children = new List<Node<TProblemState>>();
+
+            foreach (var childState in State.NextStates())
+            {
+                children.Add(new Node<TProblemState>(childState, this));
+            }
+
+            return children;
+        }
+
+        public IEnumerable<Node<TProblemState>> PathFromRoot()
+        {
+            var path = new Stack<Node<TProblemState>>();
 
             var node = this;
             while (!node.IsRootNode)
@@ -54,9 +60,14 @@ namespace EightPuzzleSolver.Search
             return path;
         }
 
+        public IEnumerable<TProblemState> PathFromRootStates()
+        {
+            return PathFromRoot().Select(n => n.State);
+        }
+
         public override string ToString()
         {
-            return $"{{Parent: {Parent}, State: {State}, Action: {Action}, PathCost: {PathCost}}}";
+            return $"State: {State}, PathCost: {PathCost}";
         }
     }
 }
