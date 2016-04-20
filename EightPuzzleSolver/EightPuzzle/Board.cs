@@ -109,6 +109,63 @@ namespace EightPuzzleSolver.EightPuzzle
             return new Board(newData, RowCount, ColumnCount, newBlankTilePos);
         }
 
+        /// <summary>
+        /// Checks if the board is solvable (by N-puzzle rules)
+        /// </summary>
+        public bool IsSolvable()
+        {
+            if (!IsCorrect())
+            {
+                return false;
+            }
+
+            // using this formula https://www.cs.bham.ac.uk/~mdr/teaching/modules04/java2/TilesSolvability.html
+
+            int inversionCount = 0;
+
+            for (int i = 0; i < _data.Length - 1; i++)
+            {
+                for (int j = i + 1; j < _data.Length; j++)
+                {
+                    if (_data[j] > 0 && _data[i] > _data[j])
+                        inversionCount++;
+                }
+            }
+
+            if (IsOdd(ColumnCount))
+            {
+                return IsEven(inversionCount);
+            }
+            else
+            {
+                int blankRowFromBottom = RowCount - BlankTilePosition.Row;
+
+                if (IsEven(blankRowFromBottom))
+                    return IsOdd(inversionCount);
+                else
+                {
+                    return IsEven(inversionCount);
+                }
+            }
+        }
+
+        /// <summary>
+        /// Checks if the board contains only elements allowed by N-puzzle rules
+        /// </summary>
+        public bool IsCorrect()
+        {
+            if (_data.Distinct().Count() != _data.Length)
+            {
+                return false;
+            }
+            if (_data.Any(val => val > RowCount * ColumnCount - 1))
+            {
+                return false;
+            }
+
+            return true;
+        }
+
         protected bool Equals(Board other)
         {
             if (other.ColumnCount != this.ColumnCount || other.RowCount != this.RowCount)
@@ -177,6 +234,16 @@ namespace EightPuzzleSolver.EightPuzzle
         private static int To1DCoord(Position pos, int width)
         {
             return pos.Row * width + pos.Column;
+        }
+
+        private static bool IsEven(int num)
+        {
+            return num % 2 == 0;
+        }
+
+        private static bool IsOdd(int num)
+        {
+            return num % 2 == 1;
         }
     }
 }

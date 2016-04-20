@@ -10,19 +10,19 @@ namespace EightPuzzleSolver.Tests.EightPuzzle
         [Fact]
         public void EqualsTest()
         {
-            var board1 = new Board(new byte[,]
+            var board1 = CreateBoard(new byte[,]
             {
                 { 0, 1, 2 },
                 { 5, 4, 3 }
             });
 
-            var board2 = new Board(new byte[,]
+            var board2 = CreateBoard(new byte[,]
             {
                 { 0, 1, 2 },
                 { 5, 4, 3 }
             });
 
-            var board3 = new Board(new byte[,]
+            var board3 = CreateBoard(new byte[,]
             {
                 { 0, 2, 1 },
                 { 5, 4, 3 }
@@ -42,7 +42,7 @@ namespace EightPuzzleSolver.Tests.EightPuzzle
         [Fact]
         public void BlankTilePositionTest()
         {
-            var board = new Board(new byte[,]
+            var board = CreateBoard(new byte[,]
             {
                 { 5, 1, 2 },
                 { 4, 3, 0 }
@@ -55,7 +55,7 @@ namespace EightPuzzleSolver.Tests.EightPuzzle
         [Fact]
         public void MoveTest()
         {
-            var board = new Board(new byte[,]
+            var board = CreateBoard(new byte[,]
             {
                 { 5, 1, 2 },
                 { 4, 3, 0 }
@@ -70,7 +70,7 @@ namespace EightPuzzleSolver.Tests.EightPuzzle
 
             var newBoard = board.Move(MoveDirection.Left);
 
-            Assert.Equal(new Board(new byte[,]
+            Assert.Equal(CreateBoard(new byte[,]
             {
                 { 5, 1, 2 },
                 { 4, 0, 3 }
@@ -82,7 +82,7 @@ namespace EightPuzzleSolver.Tests.EightPuzzle
 
             newBoard = newBoard.Move(MoveDirection.Top);
 
-            Assert.Equal(new Board(new byte[,]
+            Assert.Equal(CreateBoard(new byte[,]
             {
                 { 5, 0, 2 },
                 { 4, 1, 3 }
@@ -94,7 +94,7 @@ namespace EightPuzzleSolver.Tests.EightPuzzle
 
             newBoard = newBoard.Move(MoveDirection.Right);
 
-            Assert.Equal(new Board(new byte[,]
+            Assert.Equal(CreateBoard(new byte[,]
             {
                 { 5, 2, 0 },
                 { 4, 1, 3 }
@@ -106,7 +106,7 @@ namespace EightPuzzleSolver.Tests.EightPuzzle
 
             newBoard = newBoard.Move(MoveDirection.Bottom);
 
-            Assert.Equal(new Board(new byte[,]
+            Assert.Equal(CreateBoard(new byte[,]
             {
                 { 5, 2, 3 },
                 { 4, 1, 0 }
@@ -120,7 +120,7 @@ namespace EightPuzzleSolver.Tests.EightPuzzle
                 .Move(MoveDirection.Left)
                 .Move(MoveDirection.Top);
 
-            Assert.Equal(new Board(new byte[,]
+            Assert.Equal(CreateBoard(new byte[,]
             {
                 { 0, 2, 3 },
                 { 5, 4, 1 }
@@ -130,7 +130,7 @@ namespace EightPuzzleSolver.Tests.EightPuzzle
             Assert.False(newBoard.CanMove(MoveDirection.Top));
             Assert.True(newBoard.CanMove(MoveDirection.Bottom));
 
-            Assert.Equal(new Board(new byte[,]
+            Assert.Equal(CreateBoard(new byte[,]
             {
                 { 5, 1, 2 },
                 { 4, 3, 0 }
@@ -140,7 +140,7 @@ namespace EightPuzzleSolver.Tests.EightPuzzle
         [Fact]
         public void ShouldNotHaveDuplicates()
         {
-            var board = new Board(new byte[,]
+            var board = CreateBoard(new byte[,]
             {
                 { 5, 1, 2 },
                 { 4, 3, 0 }
@@ -155,6 +155,126 @@ namespace EightPuzzleSolver.Tests.EightPuzzle
             set.Add(board.Move(MoveDirection.Top));
 
             Assert.Equal(new HashSet<Board> { board, board.Move(MoveDirection.Left), board.Move(MoveDirection.Top) }, set);
+        }
+
+        [Fact]
+        public void IsSolvableTest()
+        {
+            var unsolvableBoards = new[]
+            {
+                new byte[,]
+                {
+                    { 1, 2, 3 },
+                    { 4, 5, 6 },
+                    { 8, 7, 0 }
+                },
+                new byte[,]
+                {
+                    { 1, 2, 3 },
+                    { 4, 6, 7 },
+                    { 8, 5, 0 }
+                },
+                new byte[,]
+                {
+                    { 8, 1, 2 },
+                    { 0, 4, 3 },
+                    { 7, 6, 5 }
+                },
+                new byte[,]
+                {
+                    { 1, 2, 3, 4 },
+                    { 5, 6, 7, 8 },
+                    { 9, 10, 11, 12 },
+                    { 13, 15, 14, 0 }
+                },
+                new byte[,]
+                {
+                    { 4, 5, 0 },
+                    { 1, 3, 2 }
+                },
+                new byte[,]
+                {
+                    { 0, 7, 2, 1 },
+                    { 4, 6, 3, 5 }
+                },
+                new byte[,]
+                {
+                    { 1, 3 },
+                    { 2, 0 }
+                },
+            };
+
+            var solvableBoards = new[]
+            {
+                new byte[,]
+                {
+                    { 1, 2, 3 },
+                    { 4, 5, 6 },
+                    { 0, 7, 8 }
+                },
+                new byte[,]
+                {
+                    { 1, 8, 2 },
+                    { 0, 4, 3 },
+                    { 7, 6, 5 }
+                },
+                new byte[,]
+                {
+                    { 8, 6, 7 },
+                    { 2, 5, 4 },
+                    { 3, 0, 1 }
+                },
+                new byte[,]
+                {
+                    { 12, 1, 10, 2 },
+                    { 7, 11, 4, 14 },
+                    { 5, 0, 9, 15 },
+                    { 8, 13, 6, 3 }
+                },
+                new byte[,]
+                {
+                    { 0, 5, 3, 2, 1 },
+                    { 9, 4, 8, 7, 6 }
+                },
+                new byte[,]
+                {
+                    { 0, 7, 2, 1 },
+                    { 4, 3, 6, 5 }
+                },
+                new byte[,]
+                {
+                    { 4, 5, 0 },
+                    { 1, 2, 3 }
+                },
+                new byte[,]
+                {
+                    { 0, 3 },
+                    { 2, 1 }
+                },
+            };
+
+            foreach (var data in unsolvableBoards)
+            {
+                var board = CreateBoard(data);
+
+                Assert.False(board.IsSolvable(), board.ToString());
+            }
+
+            foreach (var data in solvableBoards)
+            {
+                var board = CreateBoard(data);
+
+                Assert.True(board.IsSolvable(), board.ToString());
+            }
+        }
+
+        private Board CreateBoard(byte[,] data)
+        {
+            var board = new Board(data);
+
+            Assert.True(board.IsCorrect(), "incorrect board used in tests");
+
+            return board;
         }
     }
 }
