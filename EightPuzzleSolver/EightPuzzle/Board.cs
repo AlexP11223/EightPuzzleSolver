@@ -28,9 +28,10 @@ namespace EightPuzzleSolver.EightPuzzle
 
         public static Board CreateGoalBoard(int rowCount, int columnCount)
         {
-            var data = Enumerable.Range(0, rowCount * columnCount)
-                    .Select(val => (byte)val)
-                    .ToArray();
+            var data = Enumerable.Range(1, rowCount * columnCount - 1)
+                .Concat(new [] { 0 })
+                .Select(val => (byte)val)
+                .ToArray();
 
             var board = new Board(data, rowCount, columnCount);
 
