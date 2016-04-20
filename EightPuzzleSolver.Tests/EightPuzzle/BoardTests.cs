@@ -40,21 +40,6 @@ namespace EightPuzzleSolver.Tests.EightPuzzle
         }
 
         [Fact]
-        public void ShouldReturnDataCopy()
-        {
-            var board = new Board(new byte[,]
-            {
-                { 0, 1, 2 },
-                { 5, 4, 3 }
-            });
-
-            var data = board.GetData();
-            data[1, 0] = 6;
-
-            Assert.Equal(5, board[1, 0]);
-        }
-
-        [Fact]
         public void BlankTilePositionTest()
         {
             var board = new Board(new byte[,]
@@ -81,7 +66,7 @@ namespace EightPuzzleSolver.Tests.EightPuzzle
             Assert.True(board.CanMove(MoveDirection.Top));
             Assert.False(board.CanMove(MoveDirection.Bottom));
 
-            Assert.Throws<IndexOutOfRangeException>(() => board.Move(MoveDirection.Right));
+            Assert.Throws<ArgumentException>(() => board.Move(MoveDirection.Right));
 
             var newBoard = board.Move(MoveDirection.Left);
 
