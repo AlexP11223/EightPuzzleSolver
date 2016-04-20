@@ -7,6 +7,8 @@
         public static readonly MoveDirection Top = new MoveDirection("Top", -1, 0);
         public static readonly MoveDirection Bottom = new MoveDirection("Bottom", +1, 0);
 
+        public static readonly MoveDirection[] AllDirections = { Left, Right, Top, Bottom };
+
         private MoveDirection(string name, int rowChange, int columnChange)
         {
             Name = name;

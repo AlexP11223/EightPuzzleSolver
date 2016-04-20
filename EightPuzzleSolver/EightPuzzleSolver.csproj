@@ -41,6 +41,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="EightPuzzle\Board.cs" />
+    <Compile Include="EightPuzzle\EightPuzzleState.cs" />
     <Compile Include="EightPuzzle\MoveDirection.cs" />
     <Compile Include="EightPuzzle\Position.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
