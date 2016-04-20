@@ -25,5 +25,27 @@ namespace EightPuzzleSolver.Tests.EightPuzzle
             Assert.NotEmpty(result);
         }
 
+        [Fact]
+        public void RandomBoardSearchTest()
+        {
+            var sizes = new[]
+            {
+                new { RowCount = 2, ColumnCount = 2 },
+                new { RowCount = 2, ColumnCount = 3 },
+                new { RowCount = 3, ColumnCount = 3 },
+            };
+
+            foreach (var size in sizes)
+            {
+                for (int i = 0; i < 3; i++)
+                {
+                    var problem = new EightPuzzleProblem(Board.GenerateSolvableBoard(size.RowCount, size.ColumnCount));
+
+                    var result = problem.CreateDefaultSolver().Search(problem).ToList();
+
+                    Assert.NotEmpty(result);
+                }
+            }
+        }
     }
 }
