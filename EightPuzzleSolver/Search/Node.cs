@@ -24,7 +24,7 @@ namespace EightPuzzleSolver.Search
         public Node<TProblemState> Parent { get; }
 
         /// <summary>
-        /// The cost of the path from the initial statee to the node
+        /// The cost of the path from the initial state to the node
         /// </summary>
         public int PathCost { get; }
         
