@@ -2,11 +2,41 @@
 using System.Diagnostics;
 using System.Linq;
 using System.Text;
+using EightPuzzleSolver.Helpers;
 
 namespace EightPuzzleSolver.EightPuzzle
 {
     public class Board
     {
+        public static Board GenerateSolvableBoard(int rowCount, int columnCount)
+        {
+            while (true)
+            {
+                var data = Enumerable.Range(0, rowCount * columnCount)
+                        .OrderBy(r => StaticRandom.Next())
+                        .Select(val => (byte)val)
+                        .ToArray();
+
+                var board = new Board(data, rowCount, columnCount);
+
+                Debug.Assert(board.IsCorrect());
+
+                if (board.IsSolvable())
+                    return board;
+            }
+        }
+
+        public static Board CreateGoalBoard(int rowCount, int columnCount)
+        {
+            var data = Enumerable.Range(0, rowCount * columnCount)
+                    .Select(val => (byte)val)
+                    .ToArray();
+
+            var board = new Board(data, rowCount, columnCount);
+
+            return board;
+        }
+
         private readonly byte[] _data;
 
         private Position? _blankTilePos;

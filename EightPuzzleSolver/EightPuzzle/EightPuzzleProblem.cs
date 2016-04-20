@@ -9,8 +9,16 @@ namespace EightPuzzleSolver.EightPuzzle
         public EightPuzzleProblem(Board initialBoard, Board goalBoard)
             : base(new EightPuzzleState(initialBoard))
         {
+            GoalBoard = goalBoard;
             _goalState = new EightPuzzleState(goalBoard);
         }
+
+        public EightPuzzleProblem(Board initialBoard)
+            : this(initialBoard, Board.CreateGoalBoard(initialBoard.RowCount, initialBoard.ColumnCount))
+        {
+        }
+
+        public Board GoalBoard { get; }
 
         public override bool IsGoalState(EightPuzzleState state)
         {

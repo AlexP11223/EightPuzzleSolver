@@ -268,6 +268,23 @@ namespace EightPuzzleSolver.Tests.EightPuzzle
             }
         }
 
+        [Fact]
+        public void CreateGoalBoardTest()
+        {
+            Assert.Equal(Board.CreateGoalBoard(3, 3), new Board(new byte[,]
+            {
+                { 0, 1, 2 },
+                { 3, 4, 5 },
+                { 6, 7, 8 }
+            }));
+
+            Assert.Equal(Board.CreateGoalBoard(2, 3), new Board(new byte[,]
+            {
+                { 0, 1, 2 },
+                { 3, 4, 5 }
+            }));
+        }
+
         private Board CreateBoard(byte[,] data)
         {
             var board = new Board(data);
