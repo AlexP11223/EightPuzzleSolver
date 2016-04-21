@@ -27,7 +27,7 @@ namespace EightPuzzleSolver.Search
 
             frontier.Enqueue(root, EvaluationFunction(root));
 
-            while (frontier.Any())
+            while (frontier.Count > 0)
             {
                 var node = frontier.Dequeue();
                 explored.Add(node.State);
@@ -44,8 +44,8 @@ namespace EightPuzzleSolver.Search
                         frontier.Enqueue(child, EvaluationFunction(child));
                     }
                 }
-
-                while (frontier.Any() && explored.Contains(frontier.First.State))
+                
+                while (frontier.Count > 0 && explored.Contains(frontier.First.State))
                 {
                     frontier.Dequeue();
                 }
