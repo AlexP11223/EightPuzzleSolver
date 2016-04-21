@@ -57,10 +57,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="EightPuzzle\BoardTests.cs" />
+    <Compile Include="EightPuzzle\ManhattanHeuristicFunctionTests.cs" />
     <Compile Include="EightPuzzle\PositionTests.cs" />
     <Compile Include="EightPuzzle\SearchTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Search\AStarSearchTests.cs" />
     <Compile Include="Search\DepthLimitedSearchTests.cs" />
+    <Compile Include="Search\DummyHeuristicFunction.cs" />
     <Compile Include="Search\DummyProblem.cs" />
     <Compile Include="Search\DummyProblemState.cs" />
     <Compile Include="Search\IterativeDeepeningSearchTests.cs" />

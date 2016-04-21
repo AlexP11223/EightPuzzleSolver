@@ -30,6 +30,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Priority Queue, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\OptimizedPriorityQueue.2.0.0\lib\net45\Priority Queue.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -42,19 +46,24 @@
   <ItemGroup>
     <Compile Include="EightPuzzle\Board.cs" />
     <Compile Include="EightPuzzle\EightPuzzleState.cs" />
+    <Compile Include="EightPuzzle\ManhattanHeuristicFunction.cs" />
     <Compile Include="EightPuzzle\MoveDirection.cs" />
     <Compile Include="EightPuzzle\Position.cs" />
     <Compile Include="Helpers\StaticRandom.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Search\AStarSearch.cs" />
     <Compile Include="Search\DepthLimitedSearch.cs" />
     <Compile Include="EightPuzzle\EightPuzzleProblem.cs" />
+    <Compile Include="Search\IHeuristicFunction.cs" />
     <Compile Include="Search\IProblemState.cs" />
     <Compile Include="Search\ISearch.cs" />
     <Compile Include="Search\IterativeDeepeningSearch.cs" />
     <Compile Include="Search\Node.cs" />
     <Compile Include="Search\Problem.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

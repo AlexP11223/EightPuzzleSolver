@@ -22,7 +22,12 @@ namespace EightPuzzleSolver.EightPuzzle
 
         public override bool IsGoalState(EightPuzzleState state)
         {
-            return _goalState.IsEqual(state);
+            return _goalState.Equals(state);
+        }
+
+        public override ISearch<EightPuzzleState> CreateDefaultSolver()
+        {
+            return new AStarSearch<EightPuzzleState>(new ManhattanHeuristicFunction(GoalBoard));
         }
     }
 }

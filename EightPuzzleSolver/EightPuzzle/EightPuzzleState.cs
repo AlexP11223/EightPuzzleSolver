@@ -38,11 +38,6 @@ namespace EightPuzzleSolver.EightPuzzle
         /// Cost of getting to this state from the previous state
         /// </summary>
         public int Cost { get; }
-        
-        public bool IsEqual(EightPuzzleState other)
-        {
-            return other.Board == Board;
-        }
 
         public ISet<EightPuzzleState> NextStates()
         {
@@ -61,6 +56,37 @@ namespace EightPuzzleSolver.EightPuzzle
             }
 
             return states;
+        }
+
+        public bool Equals(EightPuzzleState other)
+        {
+            if (ReferenceEquals(null, other)) return false;
+            if (ReferenceEquals(this, other)) return true;
+
+            return Equals(Board, other.Board);
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (ReferenceEquals(null, obj)) return false;
+            if (ReferenceEquals(this, obj)) return true;
+            if (obj.GetType() != this.GetType()) return false;
+            return Equals((EightPuzzleState) obj);
+        }
+
+        public override int GetHashCode()
+        {
+            return Board.GetHashCode();
+        }
+
+        public static bool operator ==(EightPuzzleState left, EightPuzzleState right)
+        {
+            return Equals(left, right);
+        }
+
+        public static bool operator !=(EightPuzzleState left, EightPuzzleState right)
+        {
+            return !Equals(left, right);
         }
 
         public override string ToString()
