@@ -60,6 +60,7 @@
     <Compile Include="Search\IterativeDeepeningSearch.cs" />
     <Compile Include="Search\Node.cs" />
     <Compile Include="Search\Problem.cs" />
+    <Compile Include="Search\RecursiveBestFirstSearch.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
