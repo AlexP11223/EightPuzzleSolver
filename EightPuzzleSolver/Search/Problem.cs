@@ -1,4 +1,6 @@
-﻿namespace EightPuzzleSolver.Search
+﻿using EightPuzzleSolver.Search.Algorithms;
+
+namespace EightPuzzleSolver.Search
 {
     public abstract class Problem<TProblemState> where TProblemState : IProblemState<TProblemState>
     {

@@ -33,7 +33,7 @@ namespace EightPuzzleSolver.Search
         /// <summary>
         /// Returns the nodes available from this node
         /// </summary>
-        public IEnumerable<Node<TProblemState>> ExpandNode()
+        public IList<Node<TProblemState>> ExpandNode()
         {
             var children = new List<Node<TProblemState>>();
 

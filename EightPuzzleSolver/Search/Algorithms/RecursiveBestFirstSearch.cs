@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 
-namespace EightPuzzleSolver.Search
+namespace EightPuzzleSolver.Search.Algorithms
 {
     public class RecursiveBestFirstSearch<TProblemState> : ISearch<TProblemState>
                                         where TProblemState : IProblemState<TProblemState>
@@ -21,6 +20,7 @@ namespace EightPuzzleSolver.Search
             var root = new Node<TProblemState>(problem.InitialState);
 
             var sr = Rbfs(problem, root, EvaluationFunction(root), Infinity);
+
             if (sr.Outcome == SearchResult.SearchOutcome.Success)
             {
                 return sr.Solution.PathFromRootStates();
@@ -36,18 +36,16 @@ namespace EightPuzzleSolver.Search
                 return new SearchResult(node, fLimit);
             }
 
-            var successors = node.ExpandNode().ToArray();
+            var successors = node.ExpandNode();
 
-            if (!successors.Any())
+            if (successors.Count == 0)
             {
                 return new SearchResult(null, Infinity);
             }
 
-            var f = new double[successors.Count()];
+            var f = new double[successors.Count];
 
-            int size = successors.Count();
-
-            for (int i = 0; i < size; i++)
+            for (int i = 0; i < successors.Count; i++)
             {
                 f[i] = Math.Max(EvaluationFunction(successors[i]), nodeF);
             }
@@ -119,7 +117,7 @@ namespace EightPuzzleSolver.Search
             return new TProblemState[0];
         }
 
-        private class SearchResult
+        private struct SearchResult
         {
             public enum SearchOutcome
             {
@@ -128,15 +126,8 @@ namespace EightPuzzleSolver.Search
 
             public SearchResult(Node<TProblemState> solution, double fCostLimit)
             {
-                if (solution == null)
-                {
-                    Outcome = SearchOutcome.Fail;
-                }
-                else
-                {
-                    Outcome = SearchOutcome.Success;
-                    Solution = solution;
-                }
+                Outcome = solution == null ? SearchOutcome.Fail : SearchOutcome.Success;
+                Solution = solution;
 
                 FCostLimit = fCostLimit;
             }

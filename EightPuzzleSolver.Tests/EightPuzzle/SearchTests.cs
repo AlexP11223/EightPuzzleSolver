@@ -2,6 +2,7 @@
 using System.Linq;
 using EightPuzzleSolver.EightPuzzle;
 using EightPuzzleSolver.Search;
+using EightPuzzleSolver.Search.Algorithms;
 using Xunit;
 
 namespace EightPuzzleSolver.Tests.EightPuzzle

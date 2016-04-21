@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace EightPuzzleSolver.Search
+namespace EightPuzzleSolver.Search.Algorithms
 {
     public class IterativeDeepeningSearch<TProblemState> : ISearch<TProblemState>
                                         where TProblemState : IProblemState<TProblemState>

@@ -51,16 +51,16 @@
     <Compile Include="EightPuzzle\Position.cs" />
     <Compile Include="Helpers\StaticRandom.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Search\AStarSearch.cs" />
-    <Compile Include="Search\DepthLimitedSearch.cs" />
+    <Compile Include="Search\Algorithms\AStarSearch.cs" />
+    <Compile Include="Search\Algorithms\DepthLimitedSearch.cs" />
     <Compile Include="EightPuzzle\EightPuzzleProblem.cs" />
     <Compile Include="Search\IHeuristicFunction.cs" />
     <Compile Include="Search\IProblemState.cs" />
     <Compile Include="Search\ISearch.cs" />
-    <Compile Include="Search\IterativeDeepeningSearch.cs" />
+    <Compile Include="Search\Algorithms\IterativeDeepeningSearch.cs" />
     <Compile Include="Search\Node.cs" />
     <Compile Include="Search\Problem.cs" />
-    <Compile Include="Search\RecursiveBestFirstSearch.cs" />
+    <Compile Include="Search\Algorithms\RecursiveBestFirstSearch.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

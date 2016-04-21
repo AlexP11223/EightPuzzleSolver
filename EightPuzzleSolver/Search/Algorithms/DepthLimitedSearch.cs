@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 
-namespace EightPuzzleSolver.Search
+namespace EightPuzzleSolver.Search.Algorithms
 {
     public class DepthLimitedSearch<TProblemState> : ISearch<TProblemState>
                                         where TProblemState : IProblemState<TProblemState>

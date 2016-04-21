@@ -1,4 +1,5 @@
 ﻿using EightPuzzleSolver.Search;
+using EightPuzzleSolver.Search.Algorithms;
 
 namespace EightPuzzleSolver.EightPuzzle
 {
