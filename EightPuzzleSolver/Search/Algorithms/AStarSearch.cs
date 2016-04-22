@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Threading;
 using Priority_Queue;
 
 namespace EightPuzzleSolver.Search.Algorithms
@@ -13,7 +14,7 @@ namespace EightPuzzleSolver.Search.Algorithms
             _heuristicFunction = heuristicFunction;
         }
 
-        public IEnumerable<TProblemState> Search(Problem<TProblemState> problem)
+        public IEnumerable<TProblemState> Search(Problem<TProblemState> problem, CancellationToken cancellationToken = default(CancellationToken))
         {
             var frontier = new SimplePriorityQueue<Node<TProblemState>>();
 
@@ -25,6 +26,8 @@ namespace EightPuzzleSolver.Search.Algorithms
 
             while (frontier.Count > 0)
             {
+                cancellationToken.ThrowIfCancellationRequested();
+
                 var node = frontier.Dequeue();
                 explored.Add(node.State);
 

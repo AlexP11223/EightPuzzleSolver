@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 
 namespace EightPuzzleSolver.Search.Algorithms
 {
@@ -24,15 +25,18 @@ namespace EightPuzzleSolver.Search.Algorithms
         /// Returns a list of actions from the initial state to the goal ([root, s1, s2, ..., goal]).
         /// If the goal is not found returns empty list, also sets IsCutoff to true if it was because of the limit.
         /// </summary>
-        public IEnumerable<TProblemState> Search(Problem<TProblemState> problem)
+        public IEnumerable<TProblemState> Search(Problem<TProblemState> problem, CancellationToken cancellationToken = default(CancellationToken))
         {
-            return RecursiveDls(new Node<TProblemState>(problem.InitialState), problem, Limit, out _isCutoff);
+            return RecursiveDls(new Node<TProblemState>(problem.InitialState), problem, Limit, out _isCutoff, cancellationToken);
         }
 
         private IEnumerable<TProblemState> RecursiveDls(Node<TProblemState> node, Problem<TProblemState> problem,
-            int limit, out bool isCutoff)
+            int limit, out bool isCutoff,
+            CancellationToken cancellationToken)
         {
             isCutoff = false;
+
+            cancellationToken.ThrowIfCancellationRequested();
 
             if (problem.IsGoalState(node.State))
             {
@@ -51,7 +55,7 @@ namespace EightPuzzleSolver.Search.Algorithms
                 {
                     bool isChildCutoff;
 
-                    var result = RecursiveDls(child, problem, limit - 1, out isChildCutoff);
+                    var result = RecursiveDls(child, problem, limit - 1, out isChildCutoff, cancellationToken);
 
                     if (isChildCutoff)
                     {

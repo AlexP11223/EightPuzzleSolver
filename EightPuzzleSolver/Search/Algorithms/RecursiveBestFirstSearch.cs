@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading;
 
 namespace EightPuzzleSolver.Search.Algorithms
 {
@@ -15,11 +16,11 @@ namespace EightPuzzleSolver.Search.Algorithms
             _heuristicFunction = heuristicFunction;
         }
 
-        public IEnumerable<TProblemState> Search(Problem<TProblemState> problem)
+        public IEnumerable<TProblemState> Search(Problem<TProblemState> problem, CancellationToken cancellationToken = default(CancellationToken))
         {
             var root = new Node<TProblemState>(problem.InitialState);
 
-            var sr = Rbfs(problem, root, EvaluationFunction(root), Infinity);
+            var sr = Rbfs(problem, root, EvaluationFunction(root), Infinity, cancellationToken);
 
             if (sr.Outcome == SearchResult.SearchOutcome.Success)
             {
@@ -29,8 +30,10 @@ namespace EightPuzzleSolver.Search.Algorithms
             return EmptyResult();
         }
 
-        private SearchResult Rbfs(Problem<TProblemState> problem, Node<TProblemState> node, double nodeF, double fLimit)
+        private SearchResult Rbfs(Problem<TProblemState> problem, Node<TProblemState> node, double nodeF, double fLimit, CancellationToken cancellationToken)
         {
+            cancellationToken.ThrowIfCancellationRequested();
+
             if (problem.IsGoalState(node.State))
             {
                 return new SearchResult(node, fLimit);
@@ -61,7 +64,7 @@ namespace EightPuzzleSolver.Search.Algorithms
 
                 int altIndex = GetNextBestFValueIndex(f, bestIndex);
 
-                var sr = Rbfs(problem, successors[bestIndex], f[bestIndex], Math.Min(fLimit, f[altIndex]));
+                var sr = Rbfs(problem, successors[bestIndex], f[bestIndex], Math.Min(fLimit, f[altIndex]), cancellationToken);
 
                 f[bestIndex] = sr.FCostLimit;
 
