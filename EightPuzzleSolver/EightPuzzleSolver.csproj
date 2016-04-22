@@ -59,6 +59,7 @@
     <Compile Include="Search\ISearch.cs" />
     <Compile Include="Search\Algorithms\IterativeDeepeningSearch.cs" />
     <Compile Include="Search\Node.cs" />
+    <Compile Include="Search\NoHeuristicFunction.cs" />
     <Compile Include="Search\Problem.cs" />
     <Compile Include="Search\Algorithms\RecursiveBestFirstSearch.cs" />
   </ItemGroup>

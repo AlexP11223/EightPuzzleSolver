@@ -31,7 +31,7 @@ namespace EightPuzzleSolver.Tests.Search
 
             var astars = new[]
             {
-                new AStarSearch<DummyProblemState>(new DummyHeuristicFunction()),
+                new AStarSearch<DummyProblemState>(new NoHeuristicFunction<DummyProblemState>()),
                 new AStarSearch<DummyProblemState>(new DummyHeuristicFunction(new Dictionary<string, int>
                 {
                     ["A"] = 8,
@@ -69,7 +69,7 @@ namespace EightPuzzleSolver.Tests.Search
 
             var problem = new DummyProblem(states["A"]);
 
-            var astar = new AStarSearch<DummyProblemState>(new DummyHeuristicFunction());
+            var astar = new AStarSearch<DummyProblemState>(new NoHeuristicFunction<DummyProblemState>());
 
             var result = astar.Search(problem).ToList();
 
