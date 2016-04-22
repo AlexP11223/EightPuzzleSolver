@@ -58,6 +58,7 @@
   <ItemGroup>
     <Compile Include="EightPuzzle\BoardTests.cs" />
     <Compile Include="EightPuzzle\ManhattanHeuristicFunctionTests.cs" />
+    <Compile Include="EightPuzzle\MoveDirectionTests.cs" />
     <Compile Include="EightPuzzle\PositionTests.cs" />
     <Compile Include="EightPuzzle\SearchTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

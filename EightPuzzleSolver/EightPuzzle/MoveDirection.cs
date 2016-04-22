@@ -1,4 +1,7 @@
-﻿namespace EightPuzzleSolver.EightPuzzle
+﻿using System.Diagnostics.Contracts;
+using System.Linq;
+
+namespace EightPuzzleSolver.EightPuzzle
 {
     public struct MoveDirection
     {
@@ -21,6 +24,14 @@
         public int RowChange { get; }
 
         public int ColumnChange { get; }
+
+        [Pure]
+        public MoveDirection Opposite()
+        {
+            var oppRowChange = -RowChange;
+            var oppColumnChange = -ColumnChange;
+            return AllDirections.First(d => d.RowChange == oppRowChange && d.ColumnChange == oppColumnChange);
+        }
 
         public override string ToString()
         {
