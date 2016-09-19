@@ -29,7 +29,7 @@ namespace EightPuzzleSolverApp.Model
 
         public async Task<SolutionSearchResult> SolveAsync(Board initialBoard, Algorithm algorithm, HeuristicFunction heuristicFunction, CancellationToken cancellationToken)
         {
-            return await Task.Run(() =>
+            return await Task.Factory.StartNew(() =>
             {
                 return Solve(initialBoard, algorithm, heuristicFunction, cancellationToken);
             }, cancellationToken);

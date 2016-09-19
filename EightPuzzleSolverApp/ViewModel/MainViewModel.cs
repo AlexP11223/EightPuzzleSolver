@@ -72,7 +72,7 @@ namespace EightPuzzleSolverApp.ViewModel
                 }
 
                 _state = value;
-                RaisePropertyChanged();
+                RaisePropertyChanged("State");
 
                 SolveOrStopCommand.RaiseCanExecuteChanged();
                 GenerateBoardCommand.RaiseCanExecuteChanged();
@@ -93,7 +93,7 @@ namespace EightPuzzleSolverApp.ViewModel
                 }
 
                 _rowCount = value;
-                RaisePropertyChanged();
+                RaisePropertyChanged("RowCount");
             }
         }
 
@@ -109,7 +109,7 @@ namespace EightPuzzleSolverApp.ViewModel
                 }
 
                 _columnCount = value;
-                RaisePropertyChanged();
+                RaisePropertyChanged("ColumnCount");
             }
         }
 
@@ -125,7 +125,7 @@ namespace EightPuzzleSolverApp.ViewModel
                 }
 
                 _boardInputText = value;
-                RaisePropertyChanged();
+                RaisePropertyChanged("BoardInputText");
             }
         }
 
@@ -142,7 +142,7 @@ namespace EightPuzzleSolverApp.ViewModel
                 }
 
                 _currentBoard = value;
-                RaisePropertyChanged();
+                RaisePropertyChanged("CurrentBoard");
             }
         }
 
@@ -159,7 +159,7 @@ namespace EightPuzzleSolverApp.ViewModel
                 }
 
                 _searchResult = value;
-                RaisePropertyChanged();
+                RaisePropertyChanged("SearchResult");
             }
         }
 
@@ -178,7 +178,7 @@ namespace EightPuzzleSolverApp.ViewModel
                 }
 
                 _currentMoveNumber = value;
-                RaisePropertyChanged();
+                RaisePropertyChanged("CurrentMoveNumber");
 
                 RaisePropertyChanged(nameof(CurrentMoveIndex));
             }
@@ -206,7 +206,7 @@ namespace EightPuzzleSolverApp.ViewModel
                 }
 
                 _selectedAlgorithm = value;
-                RaisePropertyChanged();
+                RaisePropertyChanged("SelectedAlgorithm");
             }
         }
 
@@ -225,7 +225,7 @@ namespace EightPuzzleSolverApp.ViewModel
                 }
 
                 _selectedHeuristicFunction = value;
-                RaisePropertyChanged();
+                RaisePropertyChanged("SelectedHeuristicFunction");
             }
         }
 
