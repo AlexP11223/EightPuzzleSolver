@@ -16,7 +16,7 @@ A* and RBFS can be used with Manhattan Distance heuristic function or without an
 
 In GUI it is possible to choose board size, from 2x2 to 5x5 (can be not square). But starting from 4x4 it may take more time (such as 2-10 minutes) to find the solution and it finishes in reasonable time not for all inputs, using RBFS (A* works too but may take too much memory and crash).
 
-#How to build
+# How to build
 
 Open the .sln file in Visual Studio 2015 or later, build solution. 
 
